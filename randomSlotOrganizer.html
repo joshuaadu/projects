@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+
+  <body>
+    <table>
+      <thead>
+        <tr>
+          <th colspan="2">Random Slot Organiser</th>
+        </tr>
+        <tr>
+          <th>Name</th>
+          <th>Slot No.</th>
+        </tr>
+      </thead>
+      <tbody id="tbody"></tbody>
+    </table>
+    <div class="btns">
+      <input type="text" name="name" id="name" placeholder="Enter name" />
+      <input type="button" value="Add name" id="add" />
+      <input type="button" value="Add Slot" id="slotBtn" />
+    </div>
+    <script>
+      const addName = document.querySelector("#add");
+      const addSlot = document.querySelector("#slotBtn");
+
+      addName.addEventListener("click", () => {
+        addName2Table(slotPosition);
+      });
+
+      addSlot.addEventListener("click", addNumbers);
+      let slotPosition = 0;
+
+      // Add input names to the table
+      function addName2Table(num) {
+        const row = document.createElement("tr");
+        const td = document.createElement("td");
+        const tbody = document.querySelector("#tbody");
+        const name = document.querySelector("#name");
+        // console.log(name);
+        if (name.value != "") {
+          td.textContent = name.value;
+          // console.log(td);
+          //Add class to row
+          row.setAttribute("class", "newtr");
+          row.append(td);
+          // console.log(row);
+          tbody.appendChild(row);
+          name.value = "";
+          num++;
+        }
+      }
+
+      // Add a random number to each row
+      function addNumbers() {
+        const rows = document.querySelectorAll(".newtr");
+        // Clear existing slot numbers before appending new ones to prevent creating addition columns
+        rows.forEach((row) => {
+          while (row.childElementCount > 1) {
+            row.removeChild(row.lastChild);
+          }
+        });
+
+        console.log(rows);
+        const numberlist = [];
+        let i = 0;
+        do {
+          let randonNum = Math.floor(Math.random() * rows.length) + 1;
+          if (!numberlist.includes(randonNum)) {
+            numberlist.push(randonNum);
+            i++;
+          }
+        } while (i < rows.length);
+
+        for (let j = 0; j < rows.length; j++) {
+          const td = document.createElement("td");
+          td.setAttribute("class", "slotTd");
+          td.textContent = numberlist[j];
+          rows[j].appendChild(td);
+        }
+        console.log(numberlist.sort((a, b) => (a > b ? 1 : -1)));
+      }
+    </script>
+    <style>
+      th,
+      td {
+        border: 1px solid black;
+        padding: 5px 10px;
+      }
+      tbody {
+        border: 1px solid black;
+      }
+      table {
+        border-collapse: collapse;
+        margin-bottom: 20px;
+      }
+
+      #slotBtn {
+        display: block;
+        margin: 10px 0;
+      }
+    </style>
+  </body>
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="header">
+        <h2>Surprise!!!</h2>
+        <p>Joshua has a surprise for you, Hannah!</p>
+        <input type="button" value="Find out!" id="findOut">
+    </div>
+    <div class="surprise">
+
+    </div>
+    <script>
+        const findOut = document.querySelector("#findOut");
+        findOut.addEventListener("click", surprise);
+
+        function surprise() {
+            const body = document.querySelector(".header").removeChild(findOut);
+            const surpDiv = document.querySelector(".surprise");
+            const para = document.createElement("p");
+            const button = document.createElement("button");
+            button.textContent = "Continue";
+            para.textContent =
+                "Firstly, he wants you to know that you are the most beautiful thing in the world to him.";
+            surpDiv.appendChild(para);
+            surpDiv.appendChild(button);
+            button.addEventListener("click", () => {
+                kisses(surpDiv);
+                surpDiv.removeChild(button);
+            });
+
+        }
+
+        function kisses(div) {
+            const kissDiv = document.createElement("div");
+            const video = document.createElement("iframe");
+            video.src = "https://www.youtube.com/embed/FV-HPOHu8mY";
+            video.style.cssText =
+                ' width: 560; height: 315; frameborder: 0px; autoplay; allowfullscreen';
+            kissDiv.appendChild(video);
+            div.appendChild(kissDiv);
+        }
+    </script>
+    <style>
+        body {
+            width: 100%;
+            text-align: center;
+            font-size: 1rem;
+            background: #DC143C;
+            color: white;
+        }
+
+        h2 {
+            font: italic small-caps bold 4rem cursive;
+        }
+
+        p {
+            font: 1.5rem "fantasy", serif;
+
+        }
+
+        .header {
+            margin: 0 auto;
+        }
+    </style>
+</body>
+
+</html>
